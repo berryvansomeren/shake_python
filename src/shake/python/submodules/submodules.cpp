@@ -1,11 +1,11 @@
 #include "submodules.hpp"
 
 
-#include "python/submodules/submodule_application.hpp"
-#include "python/submodules/submodule_core.hpp"
-#include "python/submodules/submodule_ecs.hpp"
-#include "python/submodules/submodule_graphics.hpp"
-#include "python/submodules/submodule_hid.hpp"
+#include "shake/python/submodules/submodule_application.hpp"
+#include "shake/python/submodules/submodule_core.hpp"
+#include "shake/python/submodules/submodule_ecs.hpp"
+#include "shake/python/submodules/submodule_graphics.hpp"
+#include "shake/python/submodules/submodule_hid.hpp"
 
 
 namespace shake {

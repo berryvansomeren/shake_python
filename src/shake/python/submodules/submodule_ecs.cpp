@@ -4,13 +4,15 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
-#include "ecs/component/component.hpp"
-#include "ecs/system/system.hpp"
-#include "ecs/system/python_system.hpp"
-#include "ecs/system/render_system.hpp"
-#include "ecs/world.hpp"
-#include "graphics/render_pack.hpp"
-#include "python/submodules/macro_def_member.hpp"
+#include "shake/ecs/component/component.hpp"
+#include "shake/ecs/system/system.hpp"
+#include "shake/ecs/system/python_system.hpp"
+#include "shake/ecs/system/render_system.hpp"
+#include "shake/ecs/world.hpp"
+#include "shake/graphics/render_pack.hpp"
+#include "shake/python/submodules/macro_def_member.hpp"
+
+
 
 
 namespace shake {
@@ -28,9 +30,13 @@ void register_ecs( pybind11::module& shake_module )
 	//----------------------------------------------------------------
 	// ENTITY
 	{
+        
+
 		//----------------------------------------------------------------
 		pybind11::class_< EntityId >( m, "EntityId" )
 			DEF_CTOR( EntityIdInternalType );
+
+        
 
         // TODO: Works when running Python, but not when running c++ for some reason.. 
         //pybind11::bind_vector<std::vector<EntityId>>( m, "EntityIdVec" );

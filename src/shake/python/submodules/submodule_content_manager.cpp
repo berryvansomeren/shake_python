@@ -1,9 +1,9 @@
 #include "submodule_hid.hpp"
 
 
-#include "hid/keyboard.hpp"
-#include "hid/mouse.hpp"
-#include "hid/window.hpp"
+#include "shake/hid/keyboard.hpp"
+#include "shake/hid/mouse.hpp"
+#include "shake/hid/window.hpp"
 
 #include "macro_def_member.hpp"
 

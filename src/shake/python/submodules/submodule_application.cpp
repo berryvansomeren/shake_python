@@ -2,14 +2,14 @@
 
 #include <glm/glm.hpp>
 
-#include "main/application.hpp"
+#include "shake/main/application.hpp"
 
-#include "core/log.hpp"
-#include "core/contracts/contracts.hpp"
-#include "core/math/math.hpp"
-#include "core/math/transform_2d.hpp"
-#include "core/math/transform_3d.hpp"
-#include "python/submodules/macro_def_member.hpp"
+#include "shake/core/log.hpp"
+#include "shake/core/contracts/contracts.hpp"
+#include "shake/core/math/math.hpp"
+#include "shake/core/math/transform_2d.hpp"
+#include "shake/core/math/transform_3d.hpp"
+#include "shake/python/submodules/macro_def_member.hpp"
 
 namespace shake {
 namespace python {

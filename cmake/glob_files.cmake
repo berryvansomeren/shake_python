@@ -4,8 +4,6 @@
 # Gather external headers we want to include in our own source
 file( GLOB
     SHAKE_EXTERNAL_SOURCES
-    external/glad/src/glad.c
-    external/json11/json11.cpp
 )
 
 # Gather files related to headers of the source

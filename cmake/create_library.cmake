@@ -1,12 +1,2 @@
-add_library( 
-    ${PROJECT_NAME} 
-    SHARED
-    ${SHAKE_ALL_SOURCE_FILES}
-)
-
-set_target_properties( ${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 )
-
-set_target_properties(
-    ${PROJECT_NAME}  
-    PROPERTIES VERSION 
-    ${PROJECT_VERSION})
+# pybind creates the library of Python bindings for us
+pybind11_add_module( ${SHAKE_PYTHON_LIBRARY_NAME} SHARED ${SHAKE_ALL_SOURCE_FILES} ) 
