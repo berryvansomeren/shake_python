@@ -1,22 +1,18 @@
-#ifndef MODULE_CONTENT_MANAGER_HPP
-#define MODULE_CONTENT_MANAGER_HPP
-
+#ifndef SUBMODULE_CONTENT_HPP
+#define SUBMODULE_CONTENT_HPP
 
 #include <pybind11/pybind11.h>
-
 
 namespace shake {
 namespace python {
 
-
 //----------------------------------------------------------------
-void register_content_manager
+void register_content
 (
 	pybind11::module& shake_module
 );
 
-
 } // namespace python
 } // namespace shake
 
-#endif // MODULE_CONTENT_MANAGER_HPP
+#endif // SUBMODULE_CONTENT_HPP

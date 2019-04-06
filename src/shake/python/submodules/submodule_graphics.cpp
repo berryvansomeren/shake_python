@@ -1,6 +1,5 @@
 #include "submodule_graphics.hpp"
 
-
 #include <pybind11/stl.h>
 
 #include "shake/content/content_manager.hpp"
@@ -15,35 +14,37 @@
 #include "shake/io/path.hpp"
 #include "shake/python/submodules/macro_def_member.hpp"
 
-
 namespace shake {
 namespace python {
-
 
 //----------------------------------------------------------------
 void register_graphics( pybind11::module& shake_module )
 {
     using namespace shake::content;
     using namespace shake::graphics;
+    using namespace shake::graphics::gl;
     using namespace shake::io;
 
     auto graphics_module = shake_module.def_submodule( "graphics" );
 
     //----------------------------------------------------------------
-	pybind11::class_<Camera, std::shared_ptr<Camera>>( graphics_module, "Camera" )
+	DEF_CLASS( graphics_module, Camera )
 		DEF_CTOR( size_t, size_t )
-        DEF_MEMBER( Camera, update );
+        DEF_MEMBER( Camera, update )
+    ;
 
     graphics_module.def( "set_current_camera", &set_current_camera );
 
     //----------------------------------------------------------------
-    pybind11::enum_<gl::PolygonMode>( graphics_module, "PolygonMode" )
-        .value( "Fill", gl::PolygonMode::Fill )
-        .value( "Line", gl::PolygonMode::Line );
+    DEF_ENUM( graphics_module, PolygonMode )
+        DEF_VALUE( PolygonMode, Fill )
+        DEF_VALUE( PolygonMode, Line )
+    ;
 
-    pybind11::enum_<gl::FramebufferBitFlag>( graphics_module, "FrameBufferBitFlag" )
-        .value( "Color", gl::FramebufferBitFlag::Color )
-        .value( "Depth", gl::FramebufferBitFlag::Depth );
+    DEF_ENUM( graphics_module, FramebufferBitFlag )
+        DEF_VALUE( FramebufferBitFlag, Color )
+        DEF_VALUE( FramebufferBitFlag, Depth )
+    ;
 
     graphics_module.def( "get_current_polygon_mode", &gl::get_current_polygon_mode );
     graphics_module.def( "set_current_polygon_mode", &gl::set_current_polygon_mode );

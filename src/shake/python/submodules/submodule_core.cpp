@@ -12,7 +12,6 @@
 namespace shake {
 namespace python {
 
-
 //----------------------------------------------------------------
 void register_core(pybind11::module& shake_module)
 {
@@ -21,23 +20,25 @@ void register_core(pybind11::module& shake_module)
 	core_module.def
     ( 
         "log",     
-        []( std::string& s ) 
-        { LOG(s); }
+        []( std::string& s )            
+        { LOG(s); }         
     );
 
 	core_module.def
     ( 
         "check",   
-        []( bool b, std::string& s ) 
-        { CHECK(b, s); } 
+        []( bool b, std::string& s )    
+        { CHECK(b, s); }    
     );
 
 	//----------------------------------------------------------------
-	pybind11::class_< shake::Transform2D >( core_module, "Transform2D" )
-		DEF_CTOR();
+	DEF_CLASS( core_module, Transform2D )
+		DEF_CTOR()
+    ;
 
-	pybind11::class_< shake::Transform3D >( core_module, "Transform3D" )
-		DEF_CTOR();
+	DEF_CLASS( core_module, Transform3D )
+		DEF_CTOR()
+    ;
 }
 
 

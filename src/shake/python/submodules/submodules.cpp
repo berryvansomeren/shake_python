@@ -2,6 +2,7 @@
 
 
 #include "shake/python/submodules/submodule_application.hpp"
+#include "shake/python/submodules/submodule_content.hpp"
 #include "shake/python/submodules/submodule_core.hpp"
 #include "shake/python/submodules/submodule_ecs.hpp"
 #include "shake/python/submodules/submodule_graphics.hpp"
@@ -19,6 +20,7 @@ void register_submodules
 )
 {
     register_application( shake_module );
+    register_content    ( shake_module );
 	register_core       ( shake_module );
 	register_ecs        ( shake_module );
 	register_graphics   ( shake_module );

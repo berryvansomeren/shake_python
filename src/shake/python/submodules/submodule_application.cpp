@@ -14,29 +14,19 @@
 namespace shake {
 namespace python {
 
-
 //----------------------------------------------------------------
 void register_application( pybind11::module& shake_module )
 {
-#define DEF_APPLICATION_MEMBER( member_name ) \
-    DEF_MEMBER( Application, member_name )
-
     //----------------------------------------------------------------
-	pybind11::class_< Application >( shake_module, "Application" )
+	DEF_CLASS( shake_module, Application )
 		DEF_CTOR( const size_t, const size_t, const std::string& )
-        DEF_APPLICATION_MEMBER( run )
-        DEF_APPLICATION_MEMBER( update )
-        DEF_APPLICATION_MEMBER( get_current_frame_time )
-        .def( 
-            "window", 
-            pybind11::overload_cast<>( &Application::window ), 
-            pybind11::return_value_policy::reference 
-        )
+        DEF_MEMBER(         Application, run                    )
+        DEF_MEMBER(         Application, update                 )
+        DEF_MEMBER(         Application, get_current_frame_time )
+        DEF_PROPERTY_RW(    Application, window                 )
+        DEF_PROPERTY_RW(    Application, content_manager        )
     ;
-
-#undef DEF_APPLICATION_MEMBER
 }
-
 
 } // namespace python
 } // namespace shake

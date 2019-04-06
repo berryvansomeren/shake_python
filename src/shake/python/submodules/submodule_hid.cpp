@@ -21,48 +21,51 @@ void register_keyboard
 )
 {
     auto keyboard_module = hid_module.def_submodule( "Keyboard" );
-	
+    using Key = Keyboard::Key;
+
     keyboard_module.def
     (
         "is_up", 
-        []( const Keyboard::Key& key ) 
+        []( const Key& key ) 
         { return Keyboard::get_instance().is_up( key ); }
     );
 
 	keyboard_module.def
     (
         "is_down", 
-        []( const Keyboard::Key& key ) 
+        []( const Key& key ) 
         { return Keyboard::get_instance().is_down( key ); }
     );
 
-	pybind11::enum_<Keyboard::Key>( keyboard_module, "Key" )
-		.value( "A", Keyboard::Key::A )
-		.value( "B", Keyboard::Key::B )
-		.value( "C", Keyboard::Key::C )
-		.value( "D", Keyboard::Key::D )
-		.value( "E", Keyboard::Key::E )
-		.value( "F", Keyboard::Key::F )
-		.value( "G", Keyboard::Key::G )
-		.value( "H", Keyboard::Key::H )
-		.value( "I", Keyboard::Key::I )
-		.value( "J", Keyboard::Key::J )
-		.value( "K", Keyboard::Key::K )
-		.value( "L", Keyboard::Key::L )
-		.value( "M", Keyboard::Key::M )
-		.value( "N", Keyboard::Key::N )
-		.value( "O", Keyboard::Key::O )
-		.value( "P", Keyboard::Key::P )
-		.value( "Q", Keyboard::Key::Q )
-		.value( "R", Keyboard::Key::R )
-		.value( "S", Keyboard::Key::S )
-		.value( "T", Keyboard::Key::T )
-		.value( "U", Keyboard::Key::U )
-		.value( "V", Keyboard::Key::V )
-		.value( "W", Keyboard::Key::W )
-		.value( "X", Keyboard::Key::X )
-		.value( "Y", Keyboard::Key::Y )
-		.value( "Z", Keyboard::Key::Z );
+    
+	DEF_ENUM( keyboard_module, Key )
+		DEF_VALUE( Key, A )
+		DEF_VALUE( Key, B )
+		DEF_VALUE( Key, C )
+		DEF_VALUE( Key, D )
+		DEF_VALUE( Key, E )
+		DEF_VALUE( Key, F )
+		DEF_VALUE( Key, G )
+		DEF_VALUE( Key, H )
+		DEF_VALUE( Key, I )
+		DEF_VALUE( Key, J )
+		DEF_VALUE( Key, K )
+		DEF_VALUE( Key, L )
+		DEF_VALUE( Key, M )
+		DEF_VALUE( Key, N )
+		DEF_VALUE( Key, O )
+		DEF_VALUE( Key, P )
+		DEF_VALUE( Key, Q )
+		DEF_VALUE( Key, R )
+		DEF_VALUE( Key, S )
+		DEF_VALUE( Key, T )
+		DEF_VALUE( Key, U )
+		DEF_VALUE( Key, V )
+		DEF_VALUE( Key, W )
+		DEF_VALUE( Key, X )
+		DEF_VALUE( Key, Y )
+		DEF_VALUE( Key, Z )
+    ;
 }
 
 //----------------------------------------------------------------
@@ -72,16 +75,18 @@ void register_mouse
 )
 {
     auto mouse_module = hid_module.def_submodule( "Mouse" );
+    using Key = Mouse::Key;
 
-	pybind11::enum_<Mouse::Key>( mouse_module, "Key" )
-		.value( "Left",  Mouse::Key::Left  )
-		.value( "Right", Mouse::Key::Right )
-		.value( "Alt_1", Mouse::Key::Alt_1 )
-		.value( "Alt_2", Mouse::Key::Alt_2 )
-		.value( "Alt_3", Mouse::Key::Alt_3 )
-		.value( "Alt_4", Mouse::Key::Alt_4 )
-		.value( "Alt_5", Mouse::Key::Alt_5 )
-		.value( "Alt_6", Mouse::Key::Alt_6 );
+	DEF_ENUM( mouse_module, Key )
+		DEF_VALUE( Key, Left  )
+		DEF_VALUE( Key, Right )
+		DEF_VALUE( Key, Alt_1 )
+		DEF_VALUE( Key, Alt_2 )
+		DEF_VALUE( Key, Alt_3 )
+		DEF_VALUE( Key, Alt_4 )
+		DEF_VALUE( Key, Alt_5 )
+		DEF_VALUE( Key, Alt_6 )
+    ;
 
 	mouse_module.def
     ( 
@@ -106,14 +111,10 @@ void register_window
 {
     using namespace shake;
 
-#define DEF_WINDOW_MEMBER( member_name ) \
-    DEF_MEMBER( Window, member_name )
-
-	pybind11::class_< Window >( hid_module, "Window" )
-        DEF_WINDOW_MEMBER( swap_buffers )
+	DEF_CLASS( hid_module, Window )
+        DEF_MEMBER( Window, swap_buffers )
     ;
 
-#undef DEF_WINDOW_MEMBER
 }
 
 } // namespace anonymous
