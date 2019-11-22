@@ -64,8 +64,7 @@ void register_keyboard
 		DEF_VALUE( Key, W )
 		DEF_VALUE( Key, X )
 		DEF_VALUE( Key, Y )
-		DEF_VALUE( Key, Z )
-    ;
+		DEF_VALUE( Key, Z );
 }
 
 //----------------------------------------------------------------
@@ -85,8 +84,7 @@ void register_mouse
 		DEF_VALUE( Key, Alt_3 )
 		DEF_VALUE( Key, Alt_4 )
 		DEF_VALUE( Key, Alt_5 )
-		DEF_VALUE( Key, Alt_6 )
-    ;
+		DEF_VALUE( Key, Alt_6 );
 
 	mouse_module.def
     ( 
@@ -112,8 +110,7 @@ void register_window
     using namespace shake;
 
 	DEF_CLASS( hid_module, Window )
-        DEF_MEMBER( Window, swap_buffers )
-    ;
+        DEF_MEMBER( Window, swap_buffers );
 
 }
 

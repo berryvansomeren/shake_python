@@ -38,7 +38,13 @@ void register_core(pybind11::module& shake_module)
 
 	DEF_CLASS( core_module, Transform3D )
 		DEF_CTOR()
-    ;
+        DEF_MEMBER( Transform3D, translate );
+
+    DEF_CLASS_NAMED( core_module, glm::vec2, "Vec2" )
+        DEF_CTOR( float, float );
+
+    DEF_CLASS_NAMED( core_module, glm::vec3, "Vec3" )
+        DEF_CTOR( float, float, float );
 }
 
 
