@@ -35,6 +35,7 @@ void register_application( pybind11::module& shake_module )
         DEF_MEMBER(         Application, run                    )
         DEF_MEMBER(         Application, update                 )
         DEF_MEMBER(         Application, get_current_fps        )
+        DEF_MEMBER(         Application, close                  )   
         DEF_PROPERTY_RW(    Application, window                 )
         DEF_PROPERTY_RW(    Application, content_manager        );    
 }

@@ -64,7 +64,12 @@ void register_keyboard
 		DEF_VALUE( Key, W )
 		DEF_VALUE( Key, X )
 		DEF_VALUE( Key, Y )
-		DEF_VALUE( Key, Z );
+		DEF_VALUE( Key, Z )
+        DEF_VALUE( Key, Left    )
+        DEF_VALUE( Key, Right   )
+        DEF_VALUE( Key, Up      )
+        DEF_VALUE( Key, Down    )
+        DEF_VALUE( Key, Escape  );
 }
 
 //----------------------------------------------------------------
