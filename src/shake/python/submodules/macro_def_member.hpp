@@ -47,6 +47,7 @@
     .def( #member_name, pybind11::overload_cast<__VA_ARGS__>( &classname::member_name ),                    pybind11::return_value_policy::reference ) \
     .def( #member_name, pybind11::overload_cast<__VA_ARGS__>( &classname::member_name, pybind11::const_ ),  pybind11::return_value_policy::reference )
 
+
 // Use this version to disambiguate overloads based on arguments
 #define DEF_MEMBER_OVERLOAD( classname, member_name, /* member_argument_types */ ... ) \
     .def( #member_name, pybind11::overload_cast<__VA_ARGS__>( &classname::member_name ) )

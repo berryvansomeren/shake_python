@@ -28,6 +28,7 @@ void register_content
     DEF_TEMPLATE_MEMBER( ContentManager, unload,       content_type )
 
     DEF_CLASS( content_module, ContentManager ) 
+        DEF_MEMBER( ContentManager, host_content_directory )
         DEF_CONTENT_MANAGER_TEMPLATE_MEMBERS_CONTENT_TYPE( CubeMap      )
         DEF_CONTENT_MANAGER_TEMPLATE_MEMBERS_CONTENT_TYPE( Font         )
         DEF_CONTENT_MANAGER_TEMPLATE_MEMBERS_CONTENT_TYPE( Material     )

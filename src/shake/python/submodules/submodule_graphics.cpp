@@ -7,6 +7,7 @@
 #include "shake/core/contracts/contracts.hpp"
 #include "shake/graphics/camera.hpp"
 #include "shake/graphics/context.hpp"
+#include "shake/graphics/draw.hpp"
 #include "shake/graphics/draw_text.hpp"
 #include "shake/graphics/render_pack.hpp"
 #include "shake/graphics/material/material.hpp"
@@ -35,7 +36,8 @@ void register_graphics( pybind11::module& shake_module )
     graphics_module.def( "set_current_camera", &set_current_camera );
     graphics_module.def( "get_current_camera", &get_current_camera );
 
-    
+    graphics_module.def( "make_rectangle_2D", &make_rectangle_2D );
+    graphics_module.def( "make_circle_filled_2D", &make_circle_filled_2D );
 
     //----------------------------------------------------------------
     DEF_ENUM( graphics_module, PolygonMode )
@@ -48,17 +50,28 @@ void register_graphics( pybind11::module& shake_module )
 
 
     graphics_module.def( "clear", &gl::clear );
-    graphics_module.def( "draw_text", draw );    
+
+    graphics_module.def( "draw", pybind11::overload_cast< const RenderPack2D&, const Transform2D& >( &graphics::draw ) );
+
+    //graphics_module.def( "draw_text", draw );    
    
     //----------------------------------------------------------------
     DEF_CLASS( graphics_module, Geometry2D );
     DEF_CLASS( graphics_module, Geometry3D );
 
-    DEF_CLASS( graphics_module, Material );
+    DEF_CLASS( graphics_module, Material )
+        DEF_CTOR( const std::shared_ptr<Program>& );
 
     DEF_CLASS( graphics_module, Font );
 
-    DEF_CLASS( graphics_module, RenderPack2D );
+    DEF_CLASS( graphics_module, Program );
+
+    DEF_CLASS( graphics_module, RenderPack2D )
+        DEF_CTOR( 
+            const std::shared_ptr<Geometry2D>,
+            const std::shared_ptr<Material>
+        );
+        
     DEF_CLASS( graphics_module, RenderPack3D );
 }
 
