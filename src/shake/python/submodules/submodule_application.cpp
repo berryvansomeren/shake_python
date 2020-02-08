@@ -2,6 +2,9 @@
 
 #include <glm/glm.hpp>
 
+// Enables std::function conversions
+#include <pybind11/functional.h> 
+
 #include "shake/main/application.hpp"
 
 #include "shake/core/log.hpp"
@@ -19,13 +22,21 @@ void register_application( pybind11::module& shake_module )
 {
     //----------------------------------------------------------------
 	DEF_CLASS( shake_module, Application )
-		DEF_CTOR( const size_t, const size_t, const std::string& )
+		DEF_CTOR
+        ( 
+            const Application::InitCallback&,
+            const Application::UpdateCallback&,
+            const Application::DrawCallback&,
+            const Application::DestroyCallback&,
+            const std::size_t,
+            const std::size_t,
+            const std::string&
+        )
         DEF_MEMBER(         Application, run                    )
         DEF_MEMBER(         Application, update                 )
-        DEF_MEMBER(         Application, get_current_frame_time )
         DEF_MEMBER(         Application, get_current_fps        )
         DEF_PROPERTY_RW(    Application, window                 )
-        DEF_PROPERTY_RW(    Application, content_manager        );
+        DEF_PROPERTY_RW(    Application, content_manager        );    
 }
 
 } // namespace python

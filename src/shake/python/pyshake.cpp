@@ -21,7 +21,7 @@ PYBIND11_MAKE_OPAQUE( std::vector<shake::ecs::EntityId> );
 // However, we want to put all code that registers code,
 // to be nicely put into our own namespaces.
 // So this macro just delegates to our own functions.
-PYBIND11_MODULE( SHAKE_PYTHON_LIBRARY_NAME, shake_module ) 
+PYBIND11_MODULE( pyshake, shake_module ) 
 {
     shake::python::register_submodules( shake_module );
 }

@@ -26,57 +26,58 @@ void register_ecs( pybind11::module& shake_module )
 	//----------------------------------------------------------------
 	// ENTITY
 	{
-		DEF_CLASS( ecs_module, EntityId )
-			DEF_CTOR( EntityIdInternalType );
+		//DEF_CLASS( ecs_module, EntityId )
+		//	DEF_CTOR( EntityIdInternalType );
 
 	} // ENTITY
 
     //----------------------------------------------------------------
 	// WORLD
     {
-#define DEF_WORLD_MEMBER( member_name ) \
-    DEF_MEMBER( World, member_name )
-
-#define DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( template_type ) \
-    DEF_TEMPLATE_MEMBER                 ( World, add_component_to_entity,        template_type  ) \
-    DEF_TEMPLATE_MEMBER                 ( World, entity_has_component,           template_type  ) \
-    DEF_TEMPLATE_MEMBER_OVERLOAD        ( World, get_component_from_entity,      template_type, EntityId ) \
-    DEF_TEMPLATE_MEMBER_OVERLOAD_CONST  ( World, get_component_from_entity,      template_type, EntityId ) \
-    DEF_TEMPLATE_MEMBER                 ( World, destroy_component_from_entity,  template_type )
-
-#define DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( template_type ) \
-    DEF_TEMPLATE_MEMBER( World, add_system, template_type )
-
-		//----------------------------------------------------------------
-		DEF_CLASS( ecs_module, World )
-			DEF_CTOR( const std::string& )
-
-			DEF_WORLD_MEMBER( update_systems    )
-
-			// entities
-			DEF_WORLD_MEMBER( create_entity     )
-			DEF_WORLD_MEMBER( is_valid_entity   )
-			DEF_WORLD_MEMBER( destroy_entity    )
-			DEF_WORLD_MEMBER( get_entity_id_set )
-
-			DEF_WORLD_MEMBER( add_python_system )
-
-			// components
-			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( RenderComponent2D     )
-			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( RenderComponent3D     )
-			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( TransformComponent2D  )
-			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( TransformComponent3D  )
+//#define DEF_WORLD_MEMBER( member_name ) \
+//    DEF_MEMBER( World, member_name )
+//
+//#define DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( template_type ) \
+//    DEF_TEMPLATE_MEMBER                 ( World, add_component_to_entity,        template_type  ) \
+//    DEF_TEMPLATE_MEMBER                 ( World, entity_has_component,           template_type  ) \
+//    DEF_TEMPLATE_MEMBER_OVERLOAD        ( World, get_component_from_entity,      template_type, EntityId ) \
+//    DEF_TEMPLATE_MEMBER_OVERLOAD_CONST  ( World, get_component_from_entity,      template_type, EntityId ) \
+//    DEF_TEMPLATE_MEMBER                 ( World, destroy_component_from_entity,  template_type )
+//
+//#define DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( template_type ) \
+//    DEF_TEMPLATE_MEMBER( World, add_system, template_type )
+//
+//		//----------------------------------------------------------------
+//		DEF_CLASS( ecs_module, World )
+//			DEF_CTOR( const std::string& )
+//
+//			DEF_WORLD_MEMBER( update_systems    )
+//
+//			// entities
+//			DEF_WORLD_MEMBER( create_entity     )
+//			DEF_WORLD_MEMBER( is_valid_entity   )
+//			DEF_WORLD_MEMBER( destroy_entity    )
+//			DEF_WORLD_MEMBER( get_entity_id_set )
+//
+//			DEF_WORLD_MEMBER( add_python_system )
+//
+//			// components
+//			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( RenderComponent2D     )
+//			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( RenderComponent3D     )
+//			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( TransformComponent2D  )
+//			DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT( TransformComponent3D  );
+    }
 
 			// systems
 			// The PythonSystem trampoline should just be interpreted as a System,
 			// otherwise the automatic upcasting from Pybind11 will fail.
-			DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( System       )
-			DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( RenderSystem );
+			//DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( System       )
+			//DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM( RenderSystem );
 
 #undef DEF_WORLD_MEMBER
 #undef DEF_WORLD_TEMPLATE_MEMBERS_COMPONENT
 #undef DEF_WORLD_TEMPLATE_MEMBERS_SYSTEM
-	} // WORLD
+	//} // WORLD
 
 	//----------------------------------------------------------------
 	// COMPONENTS
@@ -92,24 +93,24 @@ void register_ecs( pybind11::module& shake_module )
 	//----------------------------------------------------------------
 	// SYSTEMS
 	{
-		//----------------------------------------------------------------
-		// The trampoline class that enables python code to inherit from C++ classes
-		DEF_CLASS( ecs_module, PythonSystem )
-			DEF_CTOR()
-			DEF_CTOR( const System& )
-			DEF_MEMBER( System, update );
+		////----------------------------------------------------------------
+		//// The trampoline class that enables python code to inherit from C++ classes
+		//DEF_CLASS( ecs_module, PythonSystem )
+		//	DEF_CTOR()
+		//	DEF_CTOR( const System& )
+		//	DEF_MEMBER( System, update );
 
-		//----------------------------------------------------------------
-		DEF_CLASS( ecs_module, RenderSystem )
-			DEF_CTOR()
-			DEF_MEMBER( RenderSystem, update );
+		////----------------------------------------------------------------
+		//DEF_CLASS( ecs_module, RenderSystem )
+		//	DEF_CTOR()
+		//	DEF_MEMBER( RenderSystem, update );
 
-        //----------------------------------------------------------------
-		ecs_module.def( "call_update", []( System* system ) -> void
-		{
-			auto vec = std::vector<EntityId> { };
-			system->update( 1.3f, nullptr, vec );
-		} );
+  //      //----------------------------------------------------------------
+		//ecs_module.def( "call_update", []( System* system ) -> void
+		//{
+		//	auto vec = std::vector<EntityId> { };
+		//	system->update( 1.3f, nullptr, vec );
+		//} );
 
 	} // SYSTEMS
 }

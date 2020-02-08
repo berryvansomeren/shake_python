@@ -8,9 +8,7 @@
 #include "shake/graphics/camera.hpp"
 #include "shake/graphics/context.hpp"
 #include "shake/graphics/draw_text.hpp"
-#include "shake/graphics/gl.hpp"
 #include "shake/graphics/render_pack.hpp"
-#include "shake/graphics/geometry/voxel_grid.hpp"
 #include "shake/graphics/material/material.hpp"
 #include "shake/io/path.hpp"
 #include "shake/python/submodules/macro_def_member.hpp"
@@ -48,76 +46,21 @@ void register_graphics( pybind11::module& shake_module )
         DEF_VALUE( FramebufferBitFlag, Color )
         DEF_VALUE( FramebufferBitFlag, Depth );
 
-    graphics_module.def( "get_current_polygon_mode", &gl::get_current_polygon_mode );
-    graphics_module.def( "set_current_polygon_mode", &gl::set_current_polygon_mode );
 
     graphics_module.def( "clear", &gl::clear );
-
-    graphics_module.def( "draw_text", draw );
-
-//    //----------------------------------------------------------------
-//#define REGISTER_TEMPLATE_MAKE_RENDERPACK( render_pack_type, render_pack_type_name, geometry_type, geometry_type_name, default_material_path ) \
-//    graphics_module.def( ( std::string( "make_") + render_pack_type_name + "__" + geometry_type_name ).c_str(), [] \
-//    ( \
-//        const std::string& geometry_path, \
-//        const std::string& material_path \
-//    ) \
-//        -> render_pack_type \
-//    { \
-//        auto& content_manager = ContentManager::get_instance(); \
-//        \
-//        return render_pack_type \
-//        { \
-//            content_manager.get_or_load<geometry_type>( Path{ geometry_path } ), \
-//            content_manager.get_or_load<Material>( Path{ material_path } ) \
-//        }; \
-//    }, \
-//    pybind11::arg( "geometry_path" ), \
-//    pybind11::arg( "material_path" ) = default_material_path \
-//    );
-//
-//#define REGISTER_TEMPLATE_MAKE_RENDERPACK_2D( geometry_type, geometry_type_name, default_material_path ) \
-//    REGISTER_TEMPLATE_MAKE_RENDERPACK( RenderPack2D, "render_pack_2d", geometry_type, geometry_type_name, default_material_path )
-//
-//#define REGISTER_TEMPLATE_MAKE_RENDERPACK_3D( geometry_type, geometry_type_name, default_material_path ) \
-//    REGISTER_TEMPLATE_MAKE_RENDERPACK( RenderPack3D, "render_pack_3d", geometry_type, geometry_type_name, default_material_path )
-    
+    graphics_module.def( "draw_text", draw );    
    
     //----------------------------------------------------------------
-
-    //DEF_CLASS( graphics_module, AGeometry2D );
-
-    DEF_CLASS( graphics_module, AGeometry3D );
-    DEF_SUBCLASS( graphics_module, VoxelGrid,   AGeometry3D );
-    DEF_SUBCLASS( graphics_module, Primitive3D, AGeometry3D );
-
-    DEF_SUBCLASS( graphics_module, Lines3D,         Primitive3D ) DEF_CTOR( const std::vector<float>& );
-    DEF_SUBCLASS( graphics_module, LineStrip3D,     Primitive3D ) DEF_CTOR( const std::vector<float>& );
-    DEF_SUBCLASS( graphics_module, LineLoop3D,      Primitive3D ) DEF_CTOR( const std::vector<float>& );
-    DEF_SUBCLASS( graphics_module, Triangles3D,     Primitive3D ) DEF_CTOR( const std::vector<float>& );
-    DEF_SUBCLASS( graphics_module, TriangleStrip3D, Primitive3D ) DEF_CTOR( const std::vector<float>& );
-    DEF_SUBCLASS( graphics_module, TriangleFan3D,   Primitive3D ) DEF_CTOR( const std::vector<float>& );
-
+    DEF_CLASS( graphics_module, Geometry2D );
+    DEF_CLASS( graphics_module, Geometry3D );
 
     DEF_CLASS( graphics_module, Material );
 
     DEF_CLASS( graphics_module, Font );
 
-    //----------------------------------------------------------------
-
     DEF_CLASS( graphics_module, RenderPack2D );
-
-    DEF_CLASS( graphics_module, RenderPack3D )
-        DEF_CTOR( const AGeometry3D::Ptr, const Material::Ptr )
-    ;
-
-    //REGISTER_TEMPLATE_MAKE_RENDERPACK_3D( VoxelGrid, "voxel_grid", "materials/default_voxel_material.json" )
-
-            
-#undef REGISTER_TEMPLATE_MAKE_RENDERPACK
-#undef REGISTER_TEMPLATE_MAKE_RENDERPACK_2D
-#undef REGISTER_TEMPLATE_MAKE_RENDERPACK_3D
-        } // RENDER PACKS
+    DEF_CLASS( graphics_module, RenderPack3D );
+}
 
 } // namespace python
 } // namespace shake
