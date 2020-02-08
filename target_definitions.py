@@ -1,12 +1,13 @@
 from pathlib import Path
 from typing import List
 
-from cmake_generator import PythonTarget, Target
+from cmake_generator import NewTarget, Target, TargetType
 
 # ----------------------------------------------------------------
 def get_target_definitions() -> List[ Target ] :
-    shake_python = PythonTarget(
+    shake_python = NewTarget(
         name = 'pyshake',
+        target_type = TargetType.PythonModule,
         src_dir_path = ( Path( __file__ ).resolve().parent / 'src/' ).as_posix(),
         dependencies = [
             'glm',
